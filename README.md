@@ -7,4 +7,5 @@ The folder consists of:
 - style.css
 - weather.js
 
-Download Firefox: 
+Download Firefox: https://www.mozilla.org/en-US/firefox/products/
+Download Sublime Text 3: https://www.sublimetext.com/3
