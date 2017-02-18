@@ -6,3 +6,5 @@ The folder consists of:
 - index.html
 - style.css
 - weather.js
+
+Download Firefox: 
