@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Weather App</title>
     <link rel="stylesheet" href="style.css">
-    <!--TODO: N-12-->
+    <!--5. Include Jquery library. This is used to get weather API data -->
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
@@ -13,15 +13,16 @@
             CITY
         </div>
         <div class="city">
-            <!--TODO: N-16 (FIRST)-->
+            <!--TODO: 1: Create a dropdown with a list of cities -->
             <select id="cityDropdown">
-                <option value="sunnyvale">Sunnyvale</option>
-                <option value="new york city">New York City</option>
-                <option value="chicago">Chicago</option>
-                <option value="seattle">Seattle</option>
+                <option value="Sunnyvale">Sunnyvale</option>
+                <option value="New York City">New York City</option>
+                <option value="Chicago">Chicago</option>
+                <option value="Vancouver">Vancouver</option>
             </select>
         </div>
-        <!--TODO: N-15-->
+        <!--TODO: 2: Create a placeholder to display current weather -->
+        <!-- Explain div, what's class -->
         <div class="current">
             <div class="item">
                 <div class="city">
@@ -34,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <!--TODO: N-14-->
+        <!-- 3: Create a placeholder to display 10 days forecast-->
         <div class="forecast">
             <div class="item" id="item0">
                 <div class="date">
@@ -159,6 +160,6 @@
          </div>
     </div>
 </body>
-<!--TODO: N-13-->
+<!--4. Include JavaScript source library-->
 <script src="weather.js"></script>
 </html>

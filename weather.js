@@ -1,34 +1,38 @@
 class WeatherApp {
     constructor() {
-        // TODO: N-10
-        // a map contains city, its current weather and 10 days forcast
+        // TODO: 1: Create a data structure that stores the current weather and forecast for all cities
         this.cityWeather = {}
 
-        this.cityDropDownE = document.getElementById('cityDropdown')
-        this.cityDropDownE.addEventListener('change', this.selectCity.bind(this), false)
-        this.selectedCity = decodeURI(this.cityDropDownE.value)
-        this.sendRequest(this.selectedCity)
+        // TODO: 2 Listen when a dropdown list is changed
+        const cityDropDownE = document.getElementById('cityDropdown')
+        cityDropDownE.addEventListener('change', this.selectCity.bind(this), false)
+        const selectedCity = decodeURI(cityDropDownE.value)
+
+        // TODO: 3 Fetch data for the current selected city
+        this.sendRequest(selectedCity)
     }
 
     selectCity(event) {
-        // TODO: N-9
+        // TODO: 2-1: Display value
         console.log(event.target.value);
-        this.selectedCity = decodeURI(event.target.value)
-        if (!this.cityWeather[this.selectedCity]) {
-            this.sendRequest(this.selectedCity)
+        const selectedCity = decodeURI(event.target.value)
+
+        // TODO: 11: Get the city weather info or display it
+        if (!this.cityWeather[selectedCity]) {
+            this.sendRequest(selectedCity)
         }
         else {
-            this.displayCurrentWeather(this.selectedCity)
+            this.displayCurrentWeather(selectedCity)
         }
         console.log(this.cityWeather)
     }
 
     sendRequest(city) {
-        // TODO: N-8
+        // TODO: 4: Build query string to get weather information using Yahoo API
         const format ='%22)&format=json'
         const base_uri = `https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22${city}${format}`
 
-        // TODO: N-7
+        // TODO: 5: Fetch data using getJSON
         $.getJSON(base_uri)
             .done(( json ) => {
                 this.processResponse(city, json)
@@ -40,39 +44,44 @@ class WeatherApp {
     }
 
     processResponse(city, json) {
-        // TODO: N-6
+        // TODO: 6: access the weather information
         const item = json.query.results.channel.item
-        // TODO: N-5
+        // TODO: 7: store in the cityWeather object in our memory
         if (item) {
             // add current weather
             this.cityWeather[city] = {}
             this.cityWeather[city].current = item['condition']
             this.cityWeather[city].forecast = item['forecast']
+            // Display current weather
             this.displayCurrentWeather(city)
         }
     }
 
     displayCurrentWeather(city) {
 
-        // TODO: N-4
+        // TODO: 8 Display weather in the DOM
         if (this.cityWeather[city]) {
+
+            // TODO 9: display city name
             const cityE = document.querySelector('.current .city')
             cityE.textContent = city
-            // TODO: N-3
+            // TODO: 10: display date, temperature, and description
             const dateE = document.querySelector('.current .date')
             const tempE = document.querySelector('.current .temp')
             const descriptionE = document.querySelector('.current .description')
             dateE.textContent = this.cityWeather[city].current.date
             tempE.textContent = this.cityWeather[city].current.temp + '°F'
             descriptionE.textContent = this.cityWeather[city].current.text
+
+
             this.displayForecast(this.cityWeather[city].forecast)
         }
     }
 
     displayForecast(forecastArray) {
-        // TODO: Step N-2
+        // TODO: 12: get forecast element from the DOM
         const forecastE = document.querySelectorAll('.forecast .item')
-        // TODO: Step N-1
+        // TODO: 13: Display 1 day forecast
         const dateE = forecastE[0].querySelector('.date')
         const highTempE = forecastE[0].querySelector('.hightemp')
         const lowTempE = forecastE[0].querySelector('.lowtemp')
@@ -81,7 +90,8 @@ class WeatherApp {
         highTempE.textContent = forecastArray[0].high + '°F'
         lowTempE.textContent = forecastArray[0].low + '°F'
         descriptionE.textContent = forecastArray[0].text
-        // TODO: Step N
+
+        // TODO: 14: display 10 days forecasts
         for (let i=0; i < forecastArray.length; i++) {
             const dateE = forecastE[i].querySelector('.date')
             const highTempE = forecastE[i].querySelector('.hightemp')
@@ -95,5 +105,5 @@ class WeatherApp {
     }
 }
 
-// TODO: N-11
+// Instantiate the weather app
 const weatherApp = new WeatherApp()
