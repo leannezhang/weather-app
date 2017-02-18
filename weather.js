@@ -1,7 +1,7 @@
 class WeatherApp {
     constructor() {
         // TODO: N-10
-        // a map contains city, its current weather and 10 days forcast
+        // a map contains city, its current weather and 10 days forecast
     }
 
     selectCity(event) {
